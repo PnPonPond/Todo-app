@@ -15,12 +15,33 @@ const BackgroundImg = styled.img`
   top: 0;
   left: 0;
   z-index: 1;
+  @media (max-width: 375px) {
+    display: none;
+  }
+`;
+
+const BackgroundImgMobile = styled.img`
+  display: none;
+  @media (max-width: 375px) {
+    display: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 475px;
+  }
 `;
 
 const Box = styled.div`
   width: 600px;
   margin-top: 80px;
   z-index: 2;
+  @media (max-width: 425px) {
+    width: 90%;
+  }
+  @media (max-width: 375px) {
+    margin-top: 50px;
+  }
 `;
 
 const TitleBox = styled.div`
@@ -46,6 +67,7 @@ const InputBox = styled.form`
   display: flex;
   align-items: center;
   background-color: ${(props) => (props.light ? "white" : "rgb(43,43,62)")};
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 0 30px;
   border-radius: 5px;
   margin-bottom: 25px;
@@ -149,6 +171,23 @@ const FilterBox = styled.form`
   width: 180px;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 425px) {
+    display: none;
+  }
+`;
+
+const FilterBoxMobile = styled.form`
+  display: none;
+  @media (max-width: 425px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) => (props.light ? "white" : "rgb(43,43,62)")};
+    padding: 20px 30px;
+    border-radius: 5px;
+    margin-top: 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
 `;
 
 const Link = styled.div`
@@ -231,12 +270,18 @@ function Main() {
     <Container light={lightMode}>
       <BackgroundImg
         src={`img/bg-desktop-${lightMode ? "light" : "dark"}.jpg`}
+        alt="bg-desktop"
+      />
+      <BackgroundImgMobile
+        src={`img/bg-mobile-${lightMode ? "light" : "dark"}.jpg`}
+        alt="bg-mobile"
       />
       <Box>
         <TitleBox>
           <Title>Todo</Title>
           <Switch
             src={`img/icon-${lightMode ? "moon" : "sun"}.svg`}
+            alt="icon-switch"
             onClick={() => {
               setLightMode(!lightMode);
             }}
@@ -259,7 +304,7 @@ function Main() {
                 <TaskBox light={lightMode}>
                   {action.complete ? (
                     <CircleCheck>
-                      <Check src="/img/icon-check.svg" />
+                      <Check src="/img/ccc.svg" alt="icon-check" />
                     </CircleCheck>
                   ) : (
                     <Circle
@@ -277,6 +322,7 @@ function Main() {
                 </TaskBox>
                 <Delete
                   src="/img/icon-cross.svg"
+                  alt="icon-cross"
                   onClick={() => handleDelete(i)}
                 />
               </GroupTask>
@@ -337,6 +383,53 @@ function Main() {
             </Link>
           </CardFooter>
         </Card>
+        <FilterBoxMobile light={lightMode}>
+          <Radio
+            type="radio"
+            value="all"
+            checked={filter === "all"}
+            name="radio1"
+            id="radio1"
+            onChange={handleRadioChange}
+          />
+          <RadioLabel
+            htmlFor="radio1"
+            checked={filter === "all"}
+            light={lightMode}
+          >
+            All
+          </RadioLabel>
+          <Radio
+            type="radio"
+            value="active"
+            name="radio2"
+            id="radio2"
+            onChange={handleRadioChange}
+            checked={filter === "active"}
+          />
+          <RadioLabel
+            htmlFor="radio2"
+            checked={filter === "active"}
+            light={lightMode}
+          >
+            Active
+          </RadioLabel>
+          <Radio
+            type="radio"
+            value="completed"
+            name="radio3"
+            id="radio3"
+            onChange={handleRadioChange}
+            checked={filter === "completed"}
+          />
+          <RadioLabel
+            htmlFor="radio3"
+            checked={filter === "completed"}
+            light={lightMode}
+          >
+            Completed
+          </RadioLabel>
+        </FilterBoxMobile>
       </Box>
     </Container>
   );

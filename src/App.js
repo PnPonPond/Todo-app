@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Main from "./Main";
 
 const GlobalStyle = createGlobalStyle`
@@ -10,18 +10,23 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Josefin Sans', sans-serif;
   }
 `;
+
+const Attr = styled.div`
+  text-align: center;
+`;
+
 function App() {
   return (
     <div>
       <GlobalStyle />
       <Main />
-      {/* <div class="attribution">
+      <Attr>
         Challenge by{" "}
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
+        <a href="https://www.frontendmentor.io?ref=challenge">
           Frontend Mentor
         </a>
-        . Coded by <a href="#">PonPond</a>.
-      </div> */}
+        . Coded by <a href="https://github.com/PnPonPond/Todo-app">PonPond</a>.
+      </Attr>
     </div>
   );
 }
