@@ -145,7 +145,7 @@ const TaskText = styled.p`
   opacity: ${(props) => (props.complete ? "0.3" : "1")};
   text-decoration-line: ${(props) =>
     props.complete ? "line-through" : "none"};
-  cursor: ${(props) => (props.complete ? "default" : "pointer")};
+  cursor: pointer;
 `;
 
 const Check = styled.img`
@@ -202,7 +202,7 @@ const Link = styled.div`
 `;
 
 const RadioLabel = styled.label`
-  cursor: ${(props) => (props.checked ? "default" : "pointer")};
+  cursor: pointer;
   color: ${(props) =>
     props.checked
       ? "#3c5fc0"
@@ -259,7 +259,10 @@ function Main() {
 
   const handleMarkTodo = (index) => {
     const newTasks = tasks.map((t, i) => {
-      if (i === index) t.complete = true;
+      if (i === index) {
+        if (t.complete === true) t.complete = false;
+        else t.complete = true;
+      }
       return t;
     });
     setTasks(newTasks);
