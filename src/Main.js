@@ -314,7 +314,7 @@ function Main() {
               <GroupTask light={lightMode} key={i}>
                 <TaskBox light={lightMode}>
                   {action.complete ? (
-                    <CircleCheck>
+                    <CircleCheck onClick={() => handleMarkTodo(i)}>
                       <Check src="/img/icon-check.svg" alt="icon-check" />
                     </CircleCheck>
                   ) : (
