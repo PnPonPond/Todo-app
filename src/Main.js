@@ -125,6 +125,9 @@ const Delete = styled.img`
     display: block;
     cursor: pointer;
   }
+  @media (max-width: 768px) {
+    display: block;
+  }
 `;
 
 const TaskBox = styled.div`
@@ -221,6 +224,7 @@ const Radio = styled.input`
 const defaultTasks = [
   { name: "Read for 1 hour", complete: true },
   { name: "Pick up flower", complete: false },
+  { name: "10 minutes meditation", complete: false },
 ];
 
 function Main() {
@@ -266,6 +270,10 @@ function Main() {
     setTasks(newTasks);
   };
 
+  const TasksLeft = () => {
+    return tasks.filter((t) => !t.complete).length;
+  };
+
   return (
     <Container light={lightMode}>
       <BackgroundImg
@@ -304,7 +312,7 @@ function Main() {
                 <TaskBox light={lightMode}>
                   {action.complete ? (
                     <CircleCheck>
-                      <Check src="/img/ccc.svg" alt="icon-check" />
+                      <Check src="/img/icon-check.svg" alt="icon-check" />
                     </CircleCheck>
                   ) : (
                     <Circle
@@ -330,7 +338,7 @@ function Main() {
           })}
 
           <CardFooter light={lightMode}>
-            <div>{`${tasks.length} items left`}</div>
+            <div>{`${TasksLeft()} items left`}</div>
             <FilterBox>
               <Radio
                 type="radio"
